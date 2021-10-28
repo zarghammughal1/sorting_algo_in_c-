@@ -1,43 +1,53 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
+int binarySearch(int[], int, int, int);
 
-void BinarySearch(int data[], int n)
+int main()
 {
-	int i=0,j=n,k,search_key;
-    bool found = false;
-    cout<< "Enter Search Key: ";
-    cin>> search_key;
-	while(i<=j)
-    {
-    	k=(i+j)/2;
-    	if(search_key ==  data[k])
-    	{
-    		found = true;
-    		break;
-		}
-		else if(search_key> data[k])
-		i = k+1;
-		else
-		j = k-1;
-	}
-	if (found)
-	cout<< "Element is Found at Index " << k << ".";
-	else
-	cout<<"Element is Not Found.";
+   int num[10] = {10, 22, 37, 55, 92, 118};
+   int search_num, loc=-1;
+
+   cout<<"Enter the number that you want to search: ";
+   cin>>search_num;
+
+   loc = binarySearch(num, 0, 6, search_num);
+
+   if(loc != -1)
+   {
+      cout<<search_num<<" found in the array at the location: "<<loc;
+   }
+   else
+   {
+      cout<<"Element not found";
+   }
+   return 0;
 }
 
-int main() 
+int binarySearch(int a[], int first, int last, int search_num)
 {
-	int size;
-	cout << "Enter The Size Of Array: "; cin >> size;
-    int data[size];
-    for(int i=0;i<size;i++)
-	{
-		cout << "Enter " << i << " Element: "; 
-		cin>>data[i];
-	}
-	    
-    BinarySearch(data,size);
-    return 0; 
+   int middle;
+   if(last >= first)
+   {
+      middle = (first + last)/2;
+      //Checking if the element is present at middle loc
+      if(a[middle] == search_num)
+      {
+         return middle+1;
+      }
+
+      //Checking if the search element is present in greater half
+      else if(a[middle] < search_num)
+      {
+         return binarySearch(a,middle+1,last,search_num);
+      }
+
+      //Checking if the search element is present in lower half
+      else
+      {
+         return binarySearch(a,first,middle-1,search_num);
+      }
+
+   }
+   return -1;
 }
