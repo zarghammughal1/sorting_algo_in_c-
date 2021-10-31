@@ -1,1 +1,4 @@
-# sorting_algo_in_c-
+# Sorting Algorithms in C++
+### Binary Search
+### Bubble Sort
+### Insertion Sort
